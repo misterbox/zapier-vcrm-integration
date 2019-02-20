@@ -11,7 +11,8 @@ const Lead = {
             key: 'agent_id',
             label: 'Primary Agent ID',
             required: true,
-            type: 'string'
+            dynamic: 'agent.id.name',
+            altersDynamicFields: true
         },
         {
             key: 'destination',

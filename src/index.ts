@@ -4,6 +4,7 @@ import { version as platformVersion } from "zapier-platform-core";
 import Authentication from "./authentication";
 import Middleware from './middleware';
 import Lead from "./creates/lead";
+import Agent from "./creates/agent";
 
 const App = {
   version,
@@ -21,7 +22,9 @@ const App = {
 
   resources: {},
 
-  triggers: {},
+  triggers: {
+    [Agent.key]: Agent
+  },
 
   searches: {},
 
