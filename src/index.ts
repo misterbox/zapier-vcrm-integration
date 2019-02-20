@@ -1,7 +1,9 @@
-import Authentication from "./authentication";
-import Middleware from './middleware';
 const { version } = require("../package.json");
 import { version as platformVersion } from "zapier-platform-core";
+
+import Authentication from "./authentication";
+import Middleware from './middleware';
+import Lead from "./creates/lead";
 
 const App = {
   version,
@@ -17,14 +19,15 @@ const App = {
     Middleware.HandleHttpError
   ],
 
-  resources: {
-  },
+  resources: {},
 
   triggers: {},
 
   searches: {},
 
-  creates: {}
+  creates: {
+    [Lead.key]: Lead
+  }
 };
 
 export default App;

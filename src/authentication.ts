@@ -10,7 +10,7 @@ const Authentication = {
     {
       key: 'api_key',
       type: 'string',
-      require: true,
+      required: true,
       helpText: "Your VCRM account's API key"
     }
   ]
