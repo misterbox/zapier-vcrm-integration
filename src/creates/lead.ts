@@ -33,7 +33,7 @@ const Lead = {
             type: 'string'
         },
         {
-            key: 'sepcial_request',
+            key: 'special_request',
             label: 'Special Request',
             required: false,
             type: 'string'

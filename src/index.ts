@@ -5,6 +5,7 @@ import Authentication from "./authentication";
 import Middleware from './middleware';
 import Lead from "./creates/lead";
 import Agent from "./creates/agent";
+import Reservation from "./creates/reservation";
 
 const App = {
   version,
@@ -29,7 +30,8 @@ const App = {
   searches: {},
 
   creates: {
-    [Lead.key]: Lead
+    [Lead.key]: Lead,
+    [Reservation.key]: Reservation
   }
 };
 
