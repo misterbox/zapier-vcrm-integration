@@ -24,13 +24,15 @@ const Reservation = {
             key: 'wants_insurance',
             label: 'Include Insurance',
             required: true,
-            type: 'boolean'
+            default: 'No',
+            choices: ['Yes', 'No']
         },
         {
-            key: 'wants_airfair',
+            key: 'wants_airfare',
             label: 'Include Airfare',
             required: true,
-            type: 'boolean'
+            default: 'No',
+            choices: ['Yes', 'No']
         },
         {
             key: 'departure_date',
@@ -68,6 +70,14 @@ const Reservation = {
             required: true,
             children: [
                 {
+                    key: 'is_primary_passenger',
+                    label: 'Primary Passenger?',
+                    required: true,
+                    choices: ['Y', 'N'],
+                    default: 'N',
+                    list: true
+                },
+                {
                     key: 'first_name',
                     label: 'First Name',
                     required: true,
@@ -87,7 +97,63 @@ const Reservation = {
                     required: true,
                     choices: ['M', 'F'],
                     list: true
-                }
+                },
+                {
+                    key: 'date_of_birth',
+                    label: 'Date of Birth',
+                    required: true,
+                    type: 'datetime',
+                    list: true
+                },
+                {
+                    key: 'email',
+                    label: 'Email Address',
+                    required: true,
+                    type: 'string',
+                    list: true
+                },
+                {
+                    key: 'phone_number',
+                    label: 'Phone Number',
+                    required: true,
+                    type: 'string',
+                    list: true
+                },
+                {
+                    key: 'street_address',
+                    label: 'Street Address',
+                    required: true,
+                    type: 'string',
+                    list: true
+                },
+                {
+                    key: 'city',
+                    label: 'City',
+                    required: true,
+                    type: 'string',
+                    list: true
+                },
+                {
+                    key: 'state',
+                    label: 'State',
+                    required: true,
+                    type: 'string',
+                    list: true
+                },
+                {
+                    key: 'zip_code',
+                    label: 'Zip Code',
+                    required: true,
+                    type: 'integer',
+                    list: true
+                },
+                {
+                    key: 'passport_expiration',
+                    label: 'Passport Expiration',
+                    required: true,
+                    type: 'datetime',
+                    list: true
+                },
             ]
         },
      ],
