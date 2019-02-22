@@ -1,3 +1,38 @@
+import { ZObject, Bundle, HttpResponse } from "zapier-platform-core";
+import Constants from "../constants";
+
+const createLead = async (z: ZObject, bundle: Bundle | any) => {
+    const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostLead`, {
+        method: 'POST',
+        body: {
+            PrimaryAgent: bundle.inputFields.agent_id,
+            Destination: `${bundle.inputFields.destination}`,
+            DepartureDate: `${bundle.inputFields.departure_date}`,
+            ResortType: `${bundle.inputFields.resort_type}`,
+            SpecialRequest: `${bundle.inputFields.special_request}`,
+            DepCity: `${bundle.inputFields.departure_city}`,
+            DepCountry: `${bundle.inputFields.departure_country}`,
+            VacationType: `${bundle.inputFields.vacation_type}`,
+            RoomType: `${bundle.inputFields.room_type}`,
+            Nights: `${bundle.inputFields.num_of_nights}`,
+            IsFlexible: `${bundle.inputFields.is_flexible}`,
+            AdultCnt: bundle.inputFields.num_of_adults,
+            Budget: bundle.inputFields.budget,
+            Passengers: [
+                {
+                    PrimaryPass: 'Y',
+                    FirstName: `${bundle.inputFields.first_name}`,
+                    LastName: `${bundle.inputFields.last_name}`,
+                    Email: `${bundle.inputFields.email_address}`,
+                    Phone1: `${bundle.inputFields.phone_number}`
+                }
+            ]
+        }
+    });
+
+    return response.content;
+};
+
 const Lead = {
  key: 'lead',
  noun: 'lead',
@@ -71,10 +106,10 @@ const Lead = {
         },
         {
             key: 'is_flexible',
-            label: 'Lead is flexiable',
+            label: 'Lead is flexible',
             required: true,
-            type: 'string',
-            helpText: 'The provided lead answers are not strict requiredments'
+            choices: ['Y', 'N'],
+            helpText: 'The provided lead answers are not strict requirements'
         },
         {
             key: 'num_of_adults',
@@ -113,7 +148,7 @@ const Lead = {
             type: 'string'
         }
     ],
-    perform: () => {}
+    perform: createLead
  }
 };
 
