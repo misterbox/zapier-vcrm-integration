@@ -1,3 +1,40 @@
+import { ZObject, Bundle } from "zapier-platform-core";
+
+const createReservation = async (z: ZObject, bundle: Bundle | any) => {
+    validateInputData(bundle);
+
+    return {};
+};
+
+const validateInputData = (bundle: Bundle) => {
+    console.log('validating');
+    let inputData = bundle.inputData;
+    let passengerList = inputData.passenger_list;
+    let passengerListProps = Object.keys(passengerList);
+
+    let listLength = passengerList[passengerListProps[0]].length;
+    let allListsHaveItems = true;
+    let areListsSameLength = true;
+
+    passengerListProps.forEach((property: string) => {
+        if (passengerList[property].length < 1) {
+            allListsHaveItems = false;
+        }
+
+        if (listLength !== passengerList[property].length) {
+            areListsSameLength = false;
+        }
+    });
+
+    if (!allListsHaveItems) {
+        throw new Error('At least one passenger is required');
+    }
+    
+    if (!areListsSameLength) {
+        throw new Error('Passenger info lists must be the same length');
+    }
+}
+
 const Reservation = {
  key: 'reservation',
  noun: 'Reservation',
@@ -157,7 +194,7 @@ const Reservation = {
             ]
         },
      ],
-     perform: () => {}
+     perform: createReservation
  }
 };
 
