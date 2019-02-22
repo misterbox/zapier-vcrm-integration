@@ -5,11 +5,6 @@ import * as nock from 'nock';
 import App from '../index';
 
 const appTester = createAppTester(App);
-/*
-    TESTS
-    At least one passenger
-    All passenger lists have same lengths
-*/
 
 describe('Reservation Creates', () => {
     it('should throw an error if zero passengers are provided', async () => {

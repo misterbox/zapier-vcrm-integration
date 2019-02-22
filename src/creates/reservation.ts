@@ -1,9 +1,28 @@
-import { ZObject, Bundle } from "zapier-platform-core";
+import { ZObject, Bundle, HttpResponse } from "zapier-platform-core";
+import Constants from "../constants";
+import { Passenger } from "../models/passenger";
+import Utilities from "../utilities";
 
 const createReservation = async (z: ZObject, bundle: Bundle | any) => {
     validateInputData(bundle);
+    const passengers: Passenger[] = Utilities.BuildPassengers(bundle.inputData.passenger_list);
 
-    return {};
+    const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostRequest`, {
+        method: 'POST',
+        body: {
+            PrimaryAgent: bundle.inputData.agent_id,
+            ReminderText: `${bundle.inputData.reminder_text}`,
+            Insurance: `${bundle.inputData.wants_insurance}`,
+            Airfare: `${bundle.inputData.wants_airfare}`,
+            DepartureDate: `${bundle.inputData.departure_date}`,
+            DepartureLocation: `${bundle.inputData.departure_location}`,
+            ReturnDate: `${bundle.inputData.return_date}`,
+            Bedding: `${bundle.inputData.bedding_type}`,
+            Passengers: passengers
+        }
+    });
+
+    return response.content;
 };
 
 const validateInputData = (bundle: Bundle) => {
@@ -33,7 +52,7 @@ const validateInputData = (bundle: Bundle) => {
     if (!areListsSameLength) {
         throw new Error('Passenger info lists must be the same length');
     }
-}
+};
 
 const Reservation = {
  key: 'reservation',
@@ -78,8 +97,8 @@ const Reservation = {
             type: 'datetime'
         },
         {
-            key: 'departure_city',
-            label: 'Departure City',
+            key: 'departure_location',
+            label: 'Departure Location',
             required: false,
             type: 'string'
         },
@@ -88,12 +107,6 @@ const Reservation = {
             label: 'Return Date',
             required: false,
             type: 'datetime'
-        },
-        {
-            key: 'return_city',
-            label: 'Return City',
-            required: false,
-            type: 'string'
         },
         {
             key: 'bedding_type',
@@ -166,13 +179,6 @@ const Reservation = {
                 {
                     key: 'city',
                     label: 'City',
-                    required: true,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'state',
-                    label: 'State',
                     required: true,
                     type: 'string',
                     list: true
