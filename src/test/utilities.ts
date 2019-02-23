@@ -17,6 +17,8 @@ describe('Utilities', () => {
             const passenger1_zip = '75098';
             const passenger1_phone = '2141234567';
             const passenger1_passportExp = '01/01/2021';
+            const passenger1_frequent_flyer_number = '123456';
+            const passenger1_seating_preference = 'window';
 
             const passenger2_isPrimary = 'N';
             const passenger2_firstName = 'Summer';
@@ -29,6 +31,8 @@ describe('Utilities', () => {
             const passenger2_zip = '75098';
             const passenger2_phone = '9998675309';
             const passenger2_passportExp = '01/01/2022';
+            const passenger2_frequent_flyer_number = '987654';
+            const passenger2_seating_preference = 'aisle';
 
             const passengerLists = {
                 is_primary_passenger: [passenger1_isPrimary, passenger2_isPrimary],
@@ -41,7 +45,9 @@ describe('Utilities', () => {
                 city: [passenger1_city, passenger2_city],
                 zip_code: [passenger1_zip, passenger2_zip],
                 phone_number: [passenger1_phone, passenger2_phone],
-                passport_expiration: [passenger1_passportExp, passenger2_passportExp]
+                passport_expiration: [passenger1_passportExp, passenger2_passportExp],
+                frequent_flyer_number: [passenger1_frequent_flyer_number, passenger2_frequent_flyer_number],
+                seating_preference: [passenger1_seating_preference, passenger2_seating_preference]
             };
             const expectedPassenger1: Passenger = {
                 PrimaryPass: passenger1_isPrimary,
@@ -54,7 +60,9 @@ describe('Utilities', () => {
                 City: passenger1_city,
                 Zip: passenger1_zip,
                 Phone1: passenger1_phone,
-                PassportExp: passenger1_passportExp
+                PassportExp: passenger1_passportExp,
+                FreqNumber: passenger1_frequent_flyer_number,
+                SeatingPref: passenger1_seating_preference
             };
             const expectedPassenger2: Passenger = {
                 PrimaryPass: passenger2_isPrimary,
@@ -67,7 +75,9 @@ describe('Utilities', () => {
                 City: passenger2_city,
                 Zip: passenger2_zip,
                 Phone1: passenger2_phone,
-                PassportExp: passenger2_passportExp
+                PassportExp: passenger2_passportExp,
+                FreqNumber: passenger2_frequent_flyer_number,
+                SeatingPref: passenger2_seating_preference
             };
 
             const passengers: Passenger[] = Utilities.BuildPassengers(passengerLists);

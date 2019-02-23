@@ -10,4 +10,6 @@ export interface Passenger {
     Zip: string;
     Phone1: string;
     PassportExp: string;
+    SeatingPref: string;
+    FreqNumber: string;
 };

@@ -18,6 +18,7 @@ const createReservation = async (z: ZObject, bundle: Bundle | any) => {
             DepartureLocation: `${bundle.inputData.departure_location}`,
             ReturnDate: `${bundle.inputData.return_date}`,
             Bedding: `${bundle.inputData.bedding_type}`,
+            RoomType: `${bundle.inputData.room_type}`,
             Passengers: passengers
         }
     });
@@ -114,6 +115,12 @@ const Reservation = {
             choices: ['King', 'Double Queen']
         },
         {
+            key: 'room_type',
+            label: 'Room Type',
+            required: false,
+            type: 'string'
+        },
+        {
             key: 'passenger_list',
             label: 'Passenger List',
             required: true,
@@ -196,6 +203,20 @@ const Reservation = {
                     type: 'datetime',
                     list: true
                 },
+                {
+                    key: 'frequent_flyer_number',
+                    label: 'Frequent Flyer Number',
+                    required: true,
+                    type: 'string',
+                    list: true
+                },
+                {
+                    key: 'seating_preference',
+                    label: 'Flight Seating Preference',
+                    required: true,
+                    type: 'string',
+                    list: true
+                }
             ]
         },
      ],

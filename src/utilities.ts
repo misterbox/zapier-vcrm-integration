@@ -16,6 +16,8 @@ const buildPassengers = (passengerData: any): Passenger[] => {
             Zip: passengerData.zip_code[index],
             Phone1: passengerData.phone_number[index],
             PassportExp: passengerData.passport_expiration[index],
+            SeatingPref: passengerData.seating_preference[index],
+            FreqNumber: passengerData.frequent_flyer_number[index]
         });
     });
 
