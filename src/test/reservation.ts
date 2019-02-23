@@ -1,14 +1,19 @@
-import { createAppTester } from 'zapier-platform-core';
+import { createAppTester, tools } from 'zapier-platform-core';
 import * as should from 'should';
 import * as nock from 'nock';
 
 import App from '../index';
 import { Passenger } from '../models/passenger';
+import Constants from '../constants';
 
 const appTester = createAppTester(App);
 
 describe('Reservation Creates', () => {
     describe('createReservation', () => {
+        beforeEach(() => {
+            tools.env.inject();
+        });
+
         it('should throw an error if zero passengers are provided', async () => {
             const passengerList = {
                     is_primary_passenger: [],
@@ -133,6 +138,26 @@ describe('Reservation Creates', () => {
                 Phone1: passenger2_phone,
                 PassportExp: passenger2_passportExp
             };
+            const bundle = {
+                inputData: {
+                    passenger_list: passengerLists
+                }
+            };
+
+            nock(Constants.API_BASE)
+                .post(`/PostRequest`, (body: any) => {
+                    const passengers: Passenger[] = body.Passengers as Passenger[];
+                    should(passengers[0]).deepEqual(expectedPassenger1);
+                    should(passengers[1]).deepEqual(expectedPassenger2);
+
+                    return true;
+                })
+                .query((query: any) => {
+                    return query.apikey === process.env.API_KEY;
+                })
+                .reply(200, {});
+
+            const response = await appTester(App.creates.reservation.operation.perform, bundle);
         });
     });
 });

@@ -22,11 +22,10 @@ const createReservation = async (z: ZObject, bundle: Bundle | any) => {
         }
     });
 
-    return response.content;
+    return JSON.parse(response.content);
 };
 
 const validateInputData = (bundle: Bundle) => {
-    console.log('validating');
     let inputData = bundle.inputData;
     let passengerList = inputData.passenger_list;
     let passengerListProps = Object.keys(passengerList);

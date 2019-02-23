@@ -13,9 +13,11 @@ const handleHttpError = (response: HttpResponse, z: ZObject) => {
 };
 
 const addApiKey = (request: any, z: ZObject, bundle: Bundle) => {
-    if (bundle.authData.api_key) {
+    const api_key = process.env.API_KEY || bundle.authData.api_key;
+
+    if (api_key) {
         request.params = request.params || {};
-        request.params.apikey = bundle.authData.api_key;
+        request.params.apikey = api_key;
     }
 
     return request;
