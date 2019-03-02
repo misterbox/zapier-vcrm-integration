@@ -5,19 +5,20 @@ const buildPassengers = (passengerData: any): Passenger[] => {
 
     passengerData.first_name.map((item: any, index: number) => {
         passengers.push({
-            PrimaryPass: passengerData.is_primary_passenger[index],
-            FirstName: passengerData.first_name[index],
-            LastName: passengerData.last_name[index],
-            Gender: passengerData.gender[index],
-            DOB: passengerData.date_of_birth[index],
-            Email: passengerData.email[index],
             Street: passengerData.street_address[index],
             City: passengerData.city[index],
-            Zip: passengerData.zip_code[index],
+            DOB: passengerData.date_of_birth[index],
+            Email: passengerData.email[index],
+            FirstName: passengerData.first_name[index],
+            FreqNumber: passengerData.frequent_flyer_number[index],
+            Gender: passengerData.gender[index],
+            MiddleName: passengerData.middle_name[index],
+            LastName: passengerData.last_name[index],
             Phone1: passengerData.phone_number[index],
             PassportExp: passengerData.passport_expiration[index],
+            PrimaryPass: passengerData.is_primary_passenger[index],
             SeatingPref: passengerData.seating_preference[index],
-            FreqNumber: passengerData.frequent_flyer_number[index]
+            Zip: passengerData.zip_code[index]
         });
     });
 

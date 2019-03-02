@@ -18,6 +18,7 @@ describe('Reservation Creates', () => {
             const passengerList = {
                     is_primary_passenger: [],
                     first_name: [],
+                    middle_name: [],
                     last_name: [],
                     gender: [],
                     date_of_birth: [],
@@ -50,6 +51,7 @@ describe('Reservation Creates', () => {
             const passengerList = {
                     is_primary_passenger: [{}],
                     first_name: [{}],
+                    middle_name: [{}],
                     last_name: [{}],
                     gender: [{}],
                     date_of_birth: [{}],
@@ -81,6 +83,7 @@ describe('Reservation Creates', () => {
         it('should POST to VCRM API with expected payload', async () => {
             const passenger1_isPrimary = 'Y';
             const passenger1_firstName = 'Rick';
+            const passenger1_middleName = 'Pickle';
             const passenger1_lastName = 'Sanchez';
             const passenger1_gender = 'M';
             const passenger1_dateOfBirth = '01/01/1989';
@@ -95,6 +98,7 @@ describe('Reservation Creates', () => {
 
             const passenger2_isPrimary = 'N';
             const passenger2_firstName = 'Summer';
+            const passenger2_middleName = 'Harlet';
             const passenger2_lastName = 'Smith';
             const passenger2_gender = 'F';
             const passenger2_dateOfBirth = '01/01/1999';
@@ -110,6 +114,7 @@ describe('Reservation Creates', () => {
             const passengerLists = {
                 is_primary_passenger: [passenger1_isPrimary, passenger2_isPrimary],
                 first_name: [passenger1_firstName, passenger2_firstName],
+                middle_name: [passenger1_middleName, passenger2_middleName],
                 last_name: [passenger1_lastName, passenger2_lastName],
                 gender: [passenger1_gender, passenger2_gender],
                 date_of_birth: [passenger1_dateOfBirth, passenger2_dateOfBirth],
@@ -125,6 +130,7 @@ describe('Reservation Creates', () => {
             const expectedPassenger1: Passenger = {
                 PrimaryPass: passenger1_isPrimary,
                 FirstName: passenger1_firstName,
+                MiddleName: passenger1_middleName,
                 LastName: passenger1_lastName,
                 Gender: passenger1_gender,
                 DOB: passenger1_dateOfBirth,
@@ -140,6 +146,7 @@ describe('Reservation Creates', () => {
             const expectedPassenger2: Passenger = {
                 PrimaryPass: passenger2_isPrimary,
                 FirstName: passenger2_firstName,
+                MiddleName: passenger2_middleName,
                 LastName: passenger2_lastName,
                 Gender: passenger2_gender,
                 DOB: passenger2_dateOfBirth,
@@ -165,9 +172,6 @@ describe('Reservation Creates', () => {
                     should(passengers[1]).deepEqual(expectedPassenger2);
 
                     return true;
-                })
-                .query((query: any) => {
-                    return query.apikey === process.env.API_KEY;
                 })
                 .reply(200, {});
 

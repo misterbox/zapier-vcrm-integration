@@ -16,8 +16,15 @@ const addApiKey = (request: any, z: ZObject, bundle: Bundle) => {
     const api_key = process.env.API_KEY || bundle.authData.api_key;
 
     if (api_key) {
-        request.params = request.params || {};
-        request.params.apikey = api_key;
+        if (request.method === 'GET') {
+            request.params = request.params || {};
+            request.params.apikey = api_key;
+        }
+        else if (request.method === 'POST') {
+            const requestBody = z.JSON.parse(request.body);
+            requestBody.ApiKey = api_key;
+            request.body = z.JSON.stringify(requestBody);
+        }
     }
 
     return request;

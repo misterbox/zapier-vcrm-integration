@@ -1,6 +1,7 @@
 export interface Passenger {
     PrimaryPass: string;
     FirstName: string;
+    MiddleName: string;
     LastName: string;
     Gender: string;
     DOB: string;

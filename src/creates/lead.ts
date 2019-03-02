@@ -5,23 +5,26 @@ const createLead = async (z: ZObject, bundle: Bundle | any) => {
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostLead`, {
         method: 'POST',
         body: {
-            PrimaryAgent: bundle.inputData.agent_id,
-            Destination: `${bundle.inputData.destination}`,
-            DepartureDate: `${bundle.inputData.departure_date}`,
-            ResortType: `${bundle.inputData.resort_type}`,
-            SpecialRequest: `${bundle.inputData.special_request}`,
-            DepCity: `${bundle.inputData.departure_city}`,
-            DepCountry: `${bundle.inputData.departure_country}`,
-            VacationType: `${bundle.inputData.vacation_type}`,
-            RoomType: `${bundle.inputData.room_type}`,
-            Nights: `${bundle.inputData.num_of_nights}`,
-            IsFlexible: `${bundle.inputData.is_flexible}`,
             AdultCnt: bundle.inputData.num_of_adults,
             Budget: bundle.inputData.budget,
+            DepCity: `${bundle.inputData.departure_city}`,
+            DepCountry: `${bundle.inputData.departure_country}`,
+            DepartureDate: `${bundle.inputData.departure_date}`,
+            Destination: `${bundle.inputData.destination}`,
+            IsFlexible: `${bundle.inputData.is_flexible}`,
+            Nights: `${bundle.inputData.num_of_nights}`,
+            OtherQuestion: `${bundle.inputData.comments}`,
+            PrimaryAgent: bundle.inputData.agent_id,
+            ResortType: `${bundle.inputData.resort_type}`,
+            RoomType: `${bundle.inputData.room_type}`,
+            SpecialRequest: `${bundle.inputData.special_request}`,
+            udf_lead1: `${bundle.inputData.method_of_communication}`,
+            VacationType: `${bundle.inputData.vacation_type}`,
             Passengers: [
                 {
                     PrimaryPass: 'Y',
                     FirstName: `${bundle.inputData.first_name}`,
+                    MiddleName: `${bundle.inputData.middle_name}`,
                     LastName: `${bundle.inputData.last_name}`,
                     Email: `${bundle.inputData.email_address}`,
                     Phone1: `${bundle.inputData.phone_number}`
@@ -130,6 +133,12 @@ const Lead = {
             type: 'string'
         },
         {
+            key: 'middle_name',
+            label: 'Lead Middle Name',
+            required: false,
+            type: 'string'
+        },
+        {
             key: 'last_name',
             label: 'Lead Last Name',
             required: true,
@@ -145,6 +154,18 @@ const Lead = {
             key: 'phone_number',
             label: 'Lead Phone Number',
             required: true,
+            type: 'string'
+        },
+        {
+            key: 'method_of_communication',
+            label: 'Preferred Method of Communication',
+            required: false,
+            type: 'string'
+        },
+        {
+            key: 'comments',
+            label: 'Comments',
+            required: false,
             type: 'string'
         }
     ],

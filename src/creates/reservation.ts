@@ -10,15 +10,16 @@ const createReservation = async (z: ZObject, bundle: Bundle | any) => {
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostRequest`, {
         method: 'POST',
         body: {
-            PrimaryAgent: bundle.inputData.agent_id,
-            ReminderText: `${bundle.inputData.reminder_text}`,
-            Insurance: `${bundle.inputData.wants_insurance}`,
             Airfare: `${bundle.inputData.wants_airfare}`,
+            Bedding: `${bundle.inputData.bedding_type}`,
             DepartureDate: `${bundle.inputData.departure_date}`,
             DepartureLocation: `${bundle.inputData.departure_location}`,
+            Insurance: `${bundle.inputData.wants_insurance}`,
+            PrimaryAgent: bundle.inputData.agent_id,
+            ReminderText: `${bundle.inputData.reminder_text}`,
             ReturnDate: `${bundle.inputData.return_date}`,
-            Bedding: `${bundle.inputData.bedding_type}`,
             RoomType: `${bundle.inputData.room_type}`,
+            SpecialRequest: `${bundle.inputData.special_request}`,
             Passengers: passengers
         }
     });
@@ -121,6 +122,12 @@ const Reservation = {
             type: 'string'
         },
         {
+            key: 'special_request',
+            label: 'Special Request',
+            required: false,
+            type: 'string'
+        },
+        {
             key: 'passenger_list',
             label: 'Passenger List',
             required: true,
@@ -136,6 +143,13 @@ const Reservation = {
                 {
                     key: 'first_name',
                     label: 'First Name',
+                    required: true,
+                    type: 'string',
+                    list: true
+                },
+                {
+                    key: 'middle_name',
+                    label: 'Middle Name',
                     required: true,
                     type: 'string',
                     list: true
