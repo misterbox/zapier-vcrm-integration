@@ -1,7 +1,10 @@
 import { ZObject, Bundle, HttpResponse } from "zapier-platform-core";
+import * as moment from 'moment';
+
 import Constants from "../constants";
 
 const createLead = async (z: ZObject, bundle: Bundle | any) => {
+    const departureDate: moment.Moment = moment(bundle.inputData.departure_date);
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostLead`, {
         method: 'POST',
         body: {
@@ -9,7 +12,7 @@ const createLead = async (z: ZObject, bundle: Bundle | any) => {
             Budget: bundle.inputData.budget,
             DepCity: `${bundle.inputData.departure_city}`,
             DepCountry: `${bundle.inputData.departure_country}`,
-            DepartureDate: `${bundle.inputData.departure_date}`,
+            DepartureDate: `${departureDate.format('MM/DD/YYYY')}`,
             Destination: `${bundle.inputData.destination}`,
             IsFlexible: `${bundle.inputData.is_flexible}`,
             Nights: `${bundle.inputData.num_of_nights}`,
@@ -103,7 +106,7 @@ const Lead = {
         {
             key: 'num_of_nights',
             label: 'Trip Duration',
-            required: true,
+            required: false,
             type: 'integer',
             helpText: 'Number of nights for the trip'
         },
@@ -123,7 +126,7 @@ const Lead = {
         {
             key: 'budget',
             label: 'Trip Budget',
-            required: true,
+            required: false,
             type: 'number'
         },
         {
