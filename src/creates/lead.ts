@@ -36,7 +36,9 @@ const createLead = async (z: ZObject, bundle: Bundle | any) => {
         }
     });
 
-    return response.content;
+    return {
+        result: response.content
+    };
 };
 
 const Lead = {
