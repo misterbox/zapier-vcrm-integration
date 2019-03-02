@@ -61,7 +61,7 @@ const Lead = {
         {
             key: 'departure_date',
             label: 'Departure Date',
-            required: true,
+            required: false,
             type: 'datetime'
         },
         {
