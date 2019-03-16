@@ -133,91 +133,91 @@ const Reservation = {
                 {
                     key: 'first_name',
                     label: 'First Name',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'middle_name',
                     label: 'Middle Name',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'last_name',
                     label: 'Last Name',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'gender',
                     label: 'Gender',
-                    required: true,
+                    required: false,
                     choices: ['M', 'F'],
                     list: true
                 },
                 {
                     key: 'date_of_birth',
                     label: 'Date of Birth',
-                    required: true,
+                    required: false,
                     type: 'datetime',
                     list: true
                 },
                 {
                     key: 'email',
                     label: 'Email Address',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'phone_number',
                     label: 'Phone Number',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'street_address',
                     label: 'Street Address',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'city',
                     label: 'City',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'zip_code',
                     label: 'Zip Code',
-                    required: true,
+                    required: false,
                     type: 'integer',
                     list: true
                 },
                 {
                     key: 'passport_expiration',
                     label: 'Passport Expiration',
-                    required: true,
+                    required: false,
                     type: 'datetime',
                     list: true
                 },
                 {
                     key: 'frequent_flyer_number',
                     label: 'Frequent Flyer Number',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 },
                 {
                     key: 'seating_preference',
                     label: 'Flight Seating Preference',
-                    required: true,
+                    required: false,
                     type: 'string',
                     list: true
                 }
