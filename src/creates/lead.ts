@@ -14,10 +14,10 @@ const createLead = async (z: ZObject, bundle: Bundle | any) => {
             DepCountry: `${bundle.inputData.departure_country}`,
             DepartureDate: `${departureDate.format('MM/DD/YYYY')}`,
             Destination: `${bundle.inputData.destination}`,
-            IsFlexible: `${bundle.inputData.is_flexible}`,
             Nights: `${bundle.inputData.num_of_nights}`,
             OtherQuestion: `${bundle.inputData.comments}`,
             PrimaryAgent: bundle.inputData.agent_id,
+            ReferredBy: `${bundle.inputData.referred_by}`,
             ResortType: `${bundle.inputData.resort_type}`,
             RoomType: `${bundle.inputData.room_type}`,
             SpecialRequest: `${bundle.inputData.special_request}`,
@@ -113,13 +113,6 @@ const Lead = {
             helpText: 'Number of nights for the trip'
         },
         {
-            key: 'is_flexible',
-            label: 'Lead is flexible',
-            required: true,
-            choices: ['Y', 'N'],
-            helpText: 'The provided lead answers are not strict requirements'
-        },
-        {
             key: 'num_of_adults',
             label: 'Number of Adults',
             required: true,
@@ -170,6 +163,12 @@ const Lead = {
         {
             key: 'comments',
             label: 'Comments',
+            required: false,
+            type: 'string'
+        },
+        {
+            key: 'referred_by',
+            label: 'Referred By',
             required: false,
             type: 'string'
         }
