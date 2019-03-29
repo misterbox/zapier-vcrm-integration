@@ -1,7 +1,12 @@
 import { Passenger } from "./models/passenger";
+import { ZObject } from "zapier-platform-core";
 
-const buildPassengers = (passengerData: any): Passenger[] => {
+const buildPassengers = (passengerData: any, z?: ZObject): Passenger[] => {
     let passengers: Passenger[] = [];
+
+    if (z) {
+        z.console.log('Passenger data: ', passengerData);
+    }
 
     passengerData.first_name.map((item: any, index: number) => {
         passengers.push({

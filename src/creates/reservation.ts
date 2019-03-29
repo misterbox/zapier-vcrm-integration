@@ -5,7 +5,7 @@ import Utilities from "../utilities";
 
 const createReservation = async (z: ZObject, bundle: Bundle | any) => {
     validateInputData(bundle);
-    const passengers: Passenger[] = Utilities.BuildPassengers(bundle.inputData.passenger_list);
+    const passengers: Passenger[] = Utilities.BuildPassengers(bundle.inputData.passenger_list, z);
 
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostRequest`, {
         method: 'POST',
@@ -32,16 +32,26 @@ const validateInputData = (bundle: Bundle) => {
     let passengerList = inputData.passenger_list;
     let passengerListProps = Object.keys(passengerList);
 
+    let listLength = passengerList[passengerListProps[0]].length;
     let allListsHaveItems = true;
+    let areListsSameLength = true;
 
     passengerListProps.forEach((property: string) => {
         if (passengerList[property].length < 1) {
             allListsHaveItems = false;
         }
+
+        if (listLength !== passengerList[property].length) {
+            areListsSameLength = false;
+        }
     });
 
     if (!allListsHaveItems) {
         throw new Error('At least one passenger is required');
+    }
+    
+    if (!areListsSameLength) {
+        throw new Error('Passenger info lists must be the same length');
     }
 };
 
@@ -133,7 +143,7 @@ const Reservation = {
                 {
                     key: 'first_name',
                     label: 'First Name',
-                    required: false,
+                    required: true,
                     type: 'string',
                     list: true
                 },
@@ -147,7 +157,7 @@ const Reservation = {
                 {
                     key: 'last_name',
                     label: 'Last Name',
-                    required: false,
+                    required: true,
                     type: 'string',
                     list: true
                 },
@@ -155,13 +165,13 @@ const Reservation = {
                     key: 'gender',
                     label: 'Gender',
                     required: false,
-                    choices: ['M', 'F'],
+                    type: 'string',
                     list: true
                 },
                 {
                     key: 'date_of_birth',
                     label: 'Date of Birth',
-                    required: false,
+                    required: true,
                     type: 'datetime',
                     list: true
                 },
@@ -203,7 +213,7 @@ const Reservation = {
                 {
                     key: 'passport_expiration',
                     label: 'Passport Expiration',
-                    required: false,
+                    required: true,
                     type: 'datetime',
                     list: true
                 },
