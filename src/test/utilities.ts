@@ -93,23 +93,143 @@ describe('Utilities', () => {
     });
 
     describe('buildPassenger', () => {
-        it('should something', () => {
-            // const expectedPassenger1: Passenger = {
-            //     PrimaryPass: passenger1_isPrimary,
-            //     FirstName: passenger1_firstName,
-            //     MiddleName: passenger1_middleName,
-            //     LastName: passenger1_lastName,
-            //     Gender: passenger1_gender,
-            //     DOB: passenger1_dateOfBirth,
-            //     Email: passenger1_email,
-            //     Street: passenger1_street,
-            //     City: passenger1_city,
-            //     Zip: passenger1_zip,
-            //     Phone1: passenger1_phone,
-            //     PassportExp: passenger1_passportExp,
-            //     FreqNumber: passenger1_frequent_flyer_number,
-            //     SeatingPref: passenger1_seating_preference
-            // };
+        it('should return expected email address given "e_mail_address" property name', () => {
+            const emailAddressPropertyName = 'e_mail_address';
+            const expectedEmailAddress = 'rick.sanchez@ump.ump';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [emailAddressPropertyName]: expectedEmailAddress
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Email).eql(expectedEmailAddress);
+        });
+
+        it('should return expected email address given "email_address" property name', () => {
+            const emailAddressPropertyName = 'email_address';
+            const expectedEmailAddress = 'rick.sanchez@ump.ump';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [emailAddressPropertyName]: expectedEmailAddress
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Email).eql(expectedEmailAddress);
+        });
+
+        it('should return expected email address given "email" property name', () => {
+            const emailAddressPropertyName = 'email';
+            const expectedEmailAddress = 'rick.sanchez@ump.ump';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [emailAddressPropertyName]: expectedEmailAddress
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Email).eql(expectedEmailAddress);
+        });
+
+        it('should return expected email address given "e_mail" property name', () => {
+            const emailAddressPropertyName = 'e_mail';
+            const expectedEmailAddress = 'rick.sanchez@ump.ump';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [emailAddressPropertyName]: expectedEmailAddress
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Email).eql(expectedEmailAddress);
+        });
+
+        it('should return expected phone number given "phone_number" property name', () => {
+            const expectedPhoneNumberPropertyName = 'phone_number';
+            const expectedPhoneNumber = '(123) 4567890';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [expectedPhoneNumberPropertyName]: expectedPhoneNumber
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Phone1).eql(expectedPhoneNumber);
+        });
+
+        it('should return expected phone number given "phonenumber" property name', () => {
+            const expectedPhoneNumberPropertyName = 'phonenumber';
+            const expectedPhoneNumber = '(123) 4567890';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [expectedPhoneNumberPropertyName]: expectedPhoneNumber
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Phone1).eql(expectedPhoneNumber);
+        });
+
+        it('should return expected passport expiration date given "passport_expiration_date" property name', () => {
+            const expectedPassportExpirationPropertyName = 'passport_expiration_date';
+            const expectedPassportExpirationDate = '04-10-2019';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                [expectedPassportExpirationPropertyName]: expectedPassportExpirationDate,
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.PassportExp).eql(expectedPassportExpirationDate);
+        });
+
+        it('should return expected passport expiration date given "passport_expiration', () => {
+            const expectedPassportExpirationPropertyName = 'passport_expiration';
+            const expectedPassportExpirationDate = '04-10-2019';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                [expectedPassportExpirationPropertyName]: expectedPassportExpirationDate,
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.PassportExp).eql(expectedPassportExpirationDate);
+        });
+
+        it('should return expected passenger', () => {
+            const expectedFirstName = 'Rick';
+            const expectedMiddleName = 'Squanch';
+            const expectedLastName = 'Sanchez';
+            const expectedGender = 'M';
+            const expectedDateofBirth = '04-10-2019';
+            const expectedEmail = 'rick@ump.ump';
+            // const 
+            const expectedPassportExpirationDate = '04-10-2019';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': expectedPassportExpirationDate,
+                'middle_name': expectedPassportExpirationDate,
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.PassportExp).eql(expectedPassportExpirationDate);
         });
     });
 
