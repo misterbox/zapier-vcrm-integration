@@ -5,7 +5,11 @@ import { Agent } from "../models/agent";
 
 const queryAgents = async (z: ZObject, bundle: Bundle) => {
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/getagents`, {
-        method: 'GET'
+        method: 'GET',
+        removeMissingValuesFrom: {
+            params: true,
+            body: true
+        }
     });
     let agents: any[] = [];
 

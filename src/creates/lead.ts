@@ -33,6 +33,10 @@ const createLead = async (z: ZObject, bundle: Bundle | any) => {
                     Phone1: `${bundle.inputData.phone_number}`
                 }
             ]
+        },
+        removeMissingValuesFrom: {
+            params: true,
+            body: true
         }
     });
 

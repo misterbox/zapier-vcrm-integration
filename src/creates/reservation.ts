@@ -5,7 +5,7 @@ import Utilities from "../utilities";
 
 const createReservation = async (z: ZObject, bundle: Bundle | any) => {
     validateInputData(bundle);
-    const passengers: Passenger[] = Utilities.BuildPassengers(bundle.inputData.passenger_list, z);
+    const passengers: Passenger[] = Utilities.buildPassengers(bundle.inputData.passenger_data_string, z);
 
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostRequest`, {
         method: 'POST',
@@ -21,6 +21,10 @@ const createReservation = async (z: ZObject, bundle: Bundle | any) => {
             RoomType: `${bundle.inputData.room_type}`,
             SpecialRequest: `${bundle.inputData.special_request}`,
             Passengers: passengers
+        },
+        removeMissingValuesFrom: {
+            params: true,
+            body: true
         }
     });
 
@@ -128,111 +132,11 @@ const Reservation = {
             type: 'string'
         },
         {
-            key: 'passenger_list',
-            label: 'Passenger List',
+            key: 'passenger_data_string',
+            label: 'Passenger Data String',
             required: true,
-            children: [
-                {
-                    key: 'is_primary_passenger',
-                    label: 'Primary Passenger?',
-                    required: true,
-                    choices: ['Y', 'N'],
-                    default: 'N',
-                    list: true
-                },
-                {
-                    key: 'first_name',
-                    label: 'First Name',
-                    required: true,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'middle_name',
-                    label: 'Middle Name',
-                    required: false,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'last_name',
-                    label: 'Last Name',
-                    required: true,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'gender',
-                    label: 'Gender',
-                    required: false,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'date_of_birth',
-                    label: 'Date of Birth',
-                    required: true,
-                    type: 'datetime',
-                    list: true
-                },
-                {
-                    key: 'email',
-                    label: 'Email Address',
-                    required: false,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'phone_number',
-                    label: 'Phone Number',
-                    required: false,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'street_address',
-                    label: 'Street Address',
-                    required: false,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'city',
-                    label: 'City',
-                    required: false,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'zip_code',
-                    label: 'Zip Code',
-                    required: false,
-                    type: 'integer',
-                    list: true
-                },
-                {
-                    key: 'passport_expiration',
-                    label: 'Passport Expiration',
-                    required: true,
-                    type: 'datetime',
-                    list: true
-                },
-                {
-                    key: 'frequent_flyer_number',
-                    label: 'Frequent Flyer Number',
-                    required: false,
-                    type: 'string',
-                    list: true
-                },
-                {
-                    key: 'seating_preference',
-                    label: 'Flight Seating Preference',
-                    required: false,
-                    type: 'string',
-                    list: true
-                }
-            ]
-        },
+            type: 'string'
+        }
      ],
      perform: createReservation
  }

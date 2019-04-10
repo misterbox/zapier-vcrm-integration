@@ -85,10 +85,62 @@ describe('Utilities', () => {
                 SeatingPref: passenger2_seating_preference
             };
 
-            const passengers: Passenger[] = Utilities.BuildPassengers(passengerLists);
+            // const passengers: Passenger[] = Utilities.buildPassengers(passengerLists);
 
-            should(passengers[0]).deepEqual(expectedPassenger1);
-            should(passengers[1]).deepEqual(expectedPassenger2);
+            // should(passengers[0]).deepEqual(expectedPassenger1);
+            // should(passengers[1]).deepEqual(expectedPassenger2);
+        });
+    });
+
+    describe('buildPassenger', () => {
+        it('should something', () => {
+            // const expectedPassenger1: Passenger = {
+            //     PrimaryPass: passenger1_isPrimary,
+            //     FirstName: passenger1_firstName,
+            //     MiddleName: passenger1_middleName,
+            //     LastName: passenger1_lastName,
+            //     Gender: passenger1_gender,
+            //     DOB: passenger1_dateOfBirth,
+            //     Email: passenger1_email,
+            //     Street: passenger1_street,
+            //     City: passenger1_city,
+            //     Zip: passenger1_zip,
+            //     Phone1: passenger1_phone,
+            //     PassportExp: passenger1_passportExp,
+            //     FreqNumber: passenger1_frequent_flyer_number,
+            //     SeatingPref: passenger1_seating_preference
+            // };
+        });
+    });
+
+    describe('matchPassengerData', () => {
+        it('should throw error with expected message when required and match cannot be found', () => {
+            const regex = /first_name/;
+            const name = 'First Name';
+            const expectedMessage = `Could not find ${name} in passenger data. Aborting.`;
+            const passengerData: any = {};
+
+            try {
+                Utilities.matchPassengerData(passengerData, regex, true, name);
+                should.fail(null, null, 'We should never get here');
+            }
+            catch (error) {
+                should(error.message).containEql(expectedMessage);
+            }
+        });
+
+        it('should return first name given passenger data with first name', () => {
+            const regex = /first_name/i;
+            const name = 'First Name';
+            const expectedFirstName = 'Rick';
+            const passengerData: any = {
+                'Passenger_1_Last_Name': 'Sanchez',
+                'Passenger_1_First_Name': expectedFirstName
+            };
+
+            const result = Utilities.matchPassengerData(passengerData, regex, true, name);
+
+            should(result).eql(expectedFirstName);
         });
     });
 });
