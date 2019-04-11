@@ -4,7 +4,6 @@ import { Passenger } from "../models/passenger";
 import Utilities from "../utilities";
 
 const createReservation = async (z: ZObject, bundle: Bundle | any) => {
-    validateInputData(bundle);
     const passengers: Passenger[] = Utilities.buildPassengers(bundle.inputData.passenger_data_string, z);
 
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostRequest`, {
@@ -29,34 +28,6 @@ const createReservation = async (z: ZObject, bundle: Bundle | any) => {
     });
 
     return JSON.parse(response.content);
-};
-
-const validateInputData = (bundle: Bundle) => {
-    let inputData = bundle.inputData;
-    let passengerList = inputData.passenger_list;
-    let passengerListProps = Object.keys(passengerList);
-
-    let listLength = passengerList[passengerListProps[0]].length;
-    let allListsHaveItems = true;
-    let areListsSameLength = true;
-
-    passengerListProps.forEach((property: string) => {
-        if (passengerList[property].length < 1) {
-            allListsHaveItems = false;
-        }
-
-        if (listLength !== passengerList[property].length) {
-            areListsSameLength = false;
-        }
-    });
-
-    if (!allListsHaveItems) {
-        throw new Error('At least one passenger is required');
-    }
-    
-    if (!areListsSameLength) {
-        throw new Error('Passenger info lists must be the same length');
-    }
 };
 
 const Reservation = {
