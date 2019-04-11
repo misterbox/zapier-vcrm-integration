@@ -26,7 +26,7 @@ const buildPassenger = (passengerData: any): Passenger => {
         Gender: matchPassengerData(passengerData, /gender/i),
         DOB: matchPassengerData(passengerData, /birth_date/i),
         Email: matchPassengerData(passengerData, /e_?mail(_address)?/i),
-        Street: matchPassengerData(passengerData, /street_address/i),
+        Street: matchPassengerData(passengerData, /street(_address)?/i),
         City: matchPassengerData(passengerData, /city/i),
         Zip: matchPassengerData(passengerData, /zipcode/i),
         Phone1: matchPassengerData(passengerData, /phone_?number/i),

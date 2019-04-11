@@ -197,7 +197,7 @@ describe('Utilities', () => {
             should(result.PassportExp).eql(expectedPassportExpirationDate);
         });
 
-        it('should return expected passport expiration date given "passport_expiration', () => {
+        it('should return expected passport expiration date given "passport_expiration"', () => {
             const expectedPassportExpirationPropertyName = 'passport_expiration';
             const expectedPassportExpirationDate = '04-10-2019';
             const passengerData: any = {
@@ -211,6 +211,36 @@ describe('Utilities', () => {
             should(result.PassportExp).eql(expectedPassportExpirationDate);
         });
 
+        it('should return expected street address given "street_address"', () => {
+            const expectedStreetAddressName = 'street_address';
+            const expectedStreetAddress = '123 Street';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [expectedStreetAddressName]: expectedStreetAddress,
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Street).eql(expectedStreetAddress);
+        });
+
+        it('should return expected street address given "street"', () => {
+            const expectedStreetAddressName = 'street';
+            const expectedStreetAddress = '123 Street';
+            const passengerData: any = {
+                'first_name': 'Rick',
+                'last_name': 'Sanchez',
+                'passport_expiration_date': '04-10-2019',
+                [expectedStreetAddressName]: expectedStreetAddress,
+            };
+
+            const result: Passenger = Utilities.buildPassenger(passengerData);
+
+            should(result.Street).eql(expectedStreetAddress);
+        });
+
         it('should return expected passenger', () => {
             const expectedFirstName = 'Rick';
             const expectedMiddleName = 'Squanch';
@@ -218,18 +248,48 @@ describe('Utilities', () => {
             const expectedGender = 'M';
             const expectedDateofBirth = '04-10-2019';
             const expectedEmail = 'rick@ump.ump';
-            // const 
+            const expectedStreet = '123 Street';
+            const expectedCity = 'Seattle';
+            const expectedZipCode = '66555';
+            const expectedPhoneNumber = '(123) 4567890';
             const expectedPassportExpirationDate = '04-10-2019';
+            const expectedFreqFlyerNumber = 'T123455';
+            const expectedSeatingPref = 'Window';
             const passengerData: any = {
-                'first_name': 'Rick',
-                'last_name': 'Sanchez',
-                'passport_expiration_date': expectedPassportExpirationDate,
-                'middle_name': expectedPassportExpirationDate,
+                'passenger_1_first_name': expectedFirstName,
+                'passenger_1_middle_name': expectedMiddleName,
+                'passenger_1_last_name': expectedLastName,
+                'passenger_1_gender': expectedGender,
+                'passenger_1_birth_date': expectedDateofBirth,
+                'passenger_1_e_mail': expectedEmail,
+                'passenger_1_street': expectedStreet,
+                'passenger_1_city': expectedCity,
+                'passenger_1_zipcode': expectedZipCode,
+                'passenger_1_phone_number': expectedPhoneNumber,
+                'passenger_1_passport_expiration_date': expectedPassportExpirationDate,
+                'passenger_1_frequent_flyer_number': expectedFreqFlyerNumber,
+                'passenger_1_seating_preference': expectedSeatingPref
+            };
+            const expectedPassenger: Passenger = {
+                PrimaryPass: 'N',
+                FirstName: expectedFirstName,
+                MiddleName: expectedMiddleName,
+                LastName: expectedLastName,
+                Gender: expectedGender,
+                DOB: expectedDateofBirth,
+                Email: expectedEmail,
+                Street: expectedStreet,
+                City: expectedCity,
+                Zip: expectedZipCode,
+                Phone1: expectedPhoneNumber,
+                PassportExp: expectedPassportExpirationDate,
+                FreqNumber: expectedFreqFlyerNumber,
+                SeatingPref: expectedSeatingPref
             };
 
             const result: Passenger = Utilities.buildPassenger(passengerData);
 
-            should(result.PassportExp).eql(expectedPassportExpirationDate);
+            should(result).deepEqual(expectedPassenger);
         });
     });
 
