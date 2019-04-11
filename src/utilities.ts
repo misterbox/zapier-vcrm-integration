@@ -14,6 +14,8 @@ const buildPassengers = (passengerDataString: string, z?: ZObject): Passenger[] 
         passengers.push(processedPassenger);
     }
 
+    validatePassengers(passengers);
+
     return passengers;
 };
 
@@ -57,10 +59,23 @@ const matchPassengerData = (passengerData: any, regex: RegExp, required: boolean
     return result;
 };
 
+const validatePassengers = (passengers: Passenger[]): void => {
+    if (passengers.length < 1) {
+        throw new Error('At least 1 passenger is required!');
+    }
+
+    if (passengers.length > 10) {
+        throw new Error('A maximum of 10 passengers is required!');
+    }
+
+    passengers[0].PrimaryPass = 'Y';
+};
+
 const Utilities = {
     buildPassenger: buildPassenger,
     buildPassengers: buildPassengers,
-    matchPassengerData: matchPassengerData
+    matchPassengerData: matchPassengerData,
+    validatePassengers: validatePassengers
 };
 
 export default Utilities;

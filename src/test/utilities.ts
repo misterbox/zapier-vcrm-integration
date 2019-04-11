@@ -323,4 +323,31 @@ describe('Utilities', () => {
             should(result).eql(expectedFirstName);
         });
     });
+
+    describe('validatePassengers', () => {
+        it('should throw expected Error given zero Passengers', () => {
+            const passengers: Passenger[] = [];
+            const expectedErrorMessage = 'At least 1 passenger is required!';
+
+            try {
+                Utilities.validatePassengers(passengers);
+                should.fail(null, null, 'We should never get here');
+            }
+            catch (error) {
+                should(error.message).containEql(expectedErrorMessage);
+            }
+        });
+
+        it('should set first passenger "PrimaryPass" to "Y", but no others', () => {
+            const passengers: Passenger[] = [
+                {} as Passenger,
+                {} as Passenger
+            ];
+
+            Utilities.validatePassengers(passengers);
+
+            should(passengers[0].PrimaryPass).eql('Y');
+            should(passengers[1].PrimaryPass).not.eql('Y');
+        });
+    });
 });
