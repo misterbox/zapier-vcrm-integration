@@ -11,12 +11,12 @@ const createReservation = async (z: ZObject, bundle: Bundle | any) => {
         body: {
             Airfare: `${bundle.inputData.wants_airfare}`,
             Bedding: `${bundle.inputData.bedding_type}`,
-            DepartureDate: `${bundle.inputData.departure_date}`,
+            DepartureDate: `${Utilities.formatDate(bundle.inputData.departure_date)}`,
             DepartureLocation: `${bundle.inputData.departure_location}`,
             Insurance: `${bundle.inputData.wants_insurance}`,
             PrimaryAgent: bundle.inputData.agent_id,
             ReminderText: `${bundle.inputData.reminder_text}`,
-            ReturnDate: `${bundle.inputData.return_date}`,
+            ReturnDate: `${Utilities.formatDate(bundle.inputData.return_date)}`,
             RoomType: `${bundle.inputData.room_type}`,
             SpecialRequest: `${bundle.inputData.special_request}`,
             Passengers: passengers
