@@ -1,13 +1,11 @@
-import { Passenger } from "./models/passenger";
 import { ZObject } from "zapier-platform-core";
+import * as moment from "moment";
 
-const buildPassengers = (passengerDataString: string, z?: ZObject): Passenger[] => {
+import { Passenger } from "./models/passenger";
+
+const buildPassengers = (passengerDataString: string): Passenger[] => {
     let passengers: Passenger[] = [];
     const passengerData: any[] = JSON.parse(passengerDataString);
-
-    if (z) {
-        z.console.log('Passenger data: ', passengerData);
-    }
 
     for (const passenger of passengerData) {
         const processedPassenger = buildPassenger(passenger);
@@ -26,13 +24,13 @@ const buildPassenger = (passengerData: any): Passenger => {
         MiddleName: matchPassengerData(passengerData, /middle_name/i),
         LastName: matchPassengerData(passengerData, /last_name/i, true, 'Last Name'),
         Gender: matchPassengerData(passengerData, /gender/i),
-        DOB: matchPassengerData(passengerData, /birth_date/i),
+        DOB: formatDate(matchPassengerData(passengerData, /birth_date/i)),
         Email: matchPassengerData(passengerData, /e_?mail(_address)?/i),
         Street: matchPassengerData(passengerData, /street(_address)?/i),
         City: matchPassengerData(passengerData, /city/i),
         Zip: matchPassengerData(passengerData, /zipcode/i),
         Phone1: matchPassengerData(passengerData, /phone_?number/i),
-        PassportExp: matchPassengerData(passengerData, /passport_expiration(_date)?/i, true, 'Passport Expiration Date'),
+        PassportExp: formatDate(matchPassengerData(passengerData, /passport_expiration(_date)?/i, true, 'Passport Expiration Date')),
         FreqNumber: matchPassengerData(passengerData, /frequent_flyer_number/i),
         SeatingPref: matchPassengerData(passengerData, /seating_preference/i)
     };
@@ -71,9 +69,23 @@ const validatePassengers = (passengers: Passenger[]): void => {
     passengers[0].PrimaryPass = 'Y';
 };
 
+const formatDate = (date: string): string => {
+    const parsedDate: moment.Moment = moment(date);
+
+    if (parsedDate.isValid()) {
+        return parsedDate.format('MM/DD/YYYY');
+    }
+    else if (!date.length) {
+        return '';
+    }
+
+    throw new Error(`Unable to parse provided date: ${date}`);
+};
+
 const Utilities = {
     buildPassenger: buildPassenger,
     buildPassengers: buildPassengers,
+    formatDate: formatDate,
     matchPassengerData: matchPassengerData,
     validatePassengers: validatePassengers
 };

@@ -4,7 +4,7 @@ import { Passenger } from "../models/passenger";
 import Utilities from "../utilities";
 
 const createReservation = async (z: ZObject, bundle: Bundle | any) => {
-    const passengers: Passenger[] = Utilities.buildPassengers(bundle.inputData.passenger_data_string, z);
+    const passengers: Passenger[] = Utilities.buildPassengers(bundle.inputData.passenger_data_string);
 
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/PostRequest`, {
         method: 'POST',

@@ -185,7 +185,7 @@ describe('Utilities', () => {
 
         it('should return expected passport expiration date given "passport_expiration_date" property name', () => {
             const expectedPassportExpirationPropertyName = 'passport_expiration_date';
-            const expectedPassportExpirationDate = '04-10-2019';
+            const expectedPassportExpirationDate = '04/10/2019';
             const passengerData: any = {
                 'first_name': 'Rick',
                 'last_name': 'Sanchez',
@@ -199,7 +199,7 @@ describe('Utilities', () => {
 
         it('should return expected passport expiration date given "passport_expiration"', () => {
             const expectedPassportExpirationPropertyName = 'passport_expiration';
-            const expectedPassportExpirationDate = '04-10-2019';
+            const expectedPassportExpirationDate = '04/10/2019';
             const passengerData: any = {
                 'first_name': 'Rick',
                 'last_name': 'Sanchez',
@@ -246,13 +246,13 @@ describe('Utilities', () => {
             const expectedMiddleName = 'Squanch';
             const expectedLastName = 'Sanchez';
             const expectedGender = 'M';
-            const expectedDateofBirth = '04-10-2019';
+            const expectedDateofBirth = '04/10/2019';
             const expectedEmail = 'rick@ump.ump';
             const expectedStreet = '123 Street';
             const expectedCity = 'Seattle';
             const expectedZipCode = '66555';
             const expectedPhoneNumber = '(123) 4567890';
-            const expectedPassportExpirationDate = '04-10-2019';
+            const expectedPassportExpirationDate = '04/10/2019';
             const expectedFreqFlyerNumber = 'T123455';
             const expectedSeatingPref = 'Window';
             const passengerData: any = {
