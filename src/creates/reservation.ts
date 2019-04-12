@@ -56,15 +56,13 @@ const Reservation = {
             key: 'wants_insurance',
             label: 'Include Insurance',
             required: true,
-            default: 'No',
-            choices: ['Yes', 'No']
+            type: 'string'
         },
         {
             key: 'wants_airfare',
             label: 'Include Airfare',
             required: true,
-            default: 'No',
-            choices: ['Yes', 'No']
+            type: 'string'
         },
         {
             key: 'departure_date',
@@ -88,7 +86,7 @@ const Reservation = {
             key: 'bedding_type',
             label: 'Bedding Type',
             required: false,
-            choices: ['King', 'Double Queen']
+            type: 'string'
         },
         {
             key: 'room_type',
