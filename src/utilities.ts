@@ -1,4 +1,3 @@
-import { ZObject } from "zapier-platform-core";
 import * as moment from "moment";
 
 import { Passenger } from "./models/passenger";

@@ -27,7 +27,9 @@ const createReservation = async (z: ZObject, bundle: Bundle | any) => {
         }
     });
 
-    return JSON.parse(response.content);
+    return {
+        result: JSON.parse(response.content)
+    };
 };
 
 const Reservation = {
